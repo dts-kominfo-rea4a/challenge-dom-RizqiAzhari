@@ -22,20 +22,83 @@
     <!-- ! Untuk tantangan ini, script jangan diubah ke external js yah ! -->
     <script>
       // TODO: Deklarasi variable sesuai dengan kebutuhan di sini
-      let button;
-      let input;
-      let output;
+      
+      //membaca div id app
+      let app = document.getElementById('app')
+
+      //membuat judul
+      let header = document.createElement('h1')
+      header.id = 'todo-title'
+      header.style.backgroundColor = '#2ECC71'
+      header.innerHTML = 'To-Do List'
+
+      app.append(header)
+
+      //membuat sub title
+      let subtitle = document.createElement('h2')
+      subtitle.id = 'todo-subtitle'
+      subtitle.innerHTML = '~ Today I need to ~'
+
+      app.appendChild(subtitle)
+
+      // membuat input text
+      let input = document.createElement('input')
+      input.type = 'text'
+      input.id = 'todo-input'
+      input.style.marginRight = '30px'
+
+      app.appendChild(input)
+
+      //membuat button
+      let button = document.createElement('button')
+      button.id = 'todo-submit'
+      button.innerHTML = 'Submit'
+
+      app.appendChild(button)
+
+      //mengambil id button untuk eksekusi submit
+      let btnSubmit = document.getElementById(button.id)
+      
+      //membuat output berupa unordered list
+      let output = document.createElement('ul')
+      output.id = 'todo-output'
+
+      app.appendChild(output)
+
+      //mengambil id output unordered list
+      let outputList = document.getElementById(output.id)
 
       // TODO: Buatlah sebuah fungsi dengan nama fnClickHandler
       // Fungsi yang digunakan untuk menambahkan tulisan
       // Jangan ubah cara deklarasi fungsinya, cukup isi saja
-      function fnClickHandler(toDoItem) {}
+      function fnClickHandler(toDoItem) {
+        // mengambil value dari input text
+        let inputValue = document.getElementById(input.id).value
+        //membuat isi input dalam element li
+        let list = document.createElement('li')
+        //mengisi element li dengan parameter fungsi
+        list.appendChild(document.createTextNode(inputValue))
+        //mengisi output dari element ul
+        outputList.appendChild(list)
+      }
 
       // TODO: register event onclick / addEventListener untuk button
       // akan menjalankan fungsi fnClickHandler
-      
+      btnSubmit.addEventListener('click', (event) => {
+        fnClickHandler(event)
+        //me-reset input text setelah submit
+        document.getElementById(input.id).value = ''
+      })
+
       // TODO: register event onkeypress / addEventListener untuk input
       // sehingga saat di input ditekan enter akan menjalankan fungsi fnClickHandler juga
+      document.addEventListener('keypress', (event) => {
+        if (event.key === "Enter"){
+          fnClickHandler(event)
+          //me-reset input text setelah submit
+          document.getElementById(input.id).value = ''
+        }
+      })
     </script>
   </body>
 </html>
